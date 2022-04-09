@@ -1,22 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const dbClass = require('./config/db');
-
-const userRoutes = require('./routes/user.routes');
-const postsRoutes = require('./routes/posts.routes');
-const authRoutes = require('./routes/auth.routes');
-const rolesRoutes = require('./routes/roles.routes');
-const commentsRoutes = require('./routes/comments.routes');
-
-const errorHandler = require('./middlewares/error-handler.middleware');
-const joiErrorHandler = require('./middlewares/joi-error-handler.middleware');
-
 class ServerClass{
   constructor(){
     this.server = express();
     this.port = process.env.PORT;
-    this.db = new dbClass();
     }
     init(){
       this.server.use( (req, res, next) => {
@@ -37,18 +25,17 @@ class ServerClass{
       this.launch();
     }
     launch(){
-      this.db.connectDb()
-      .then( db => {
           this.server.listen( this.port, options , () => {
               console.log({
                   node: `http:s//localhost:${this.port}`,
                   db: db.url,
               })
           })
-      })
       .catch( dbError => {
           console.log(dbError)
       })
   }
 
 }
+const MyServer = new ServerClass();
+MyServer.init();

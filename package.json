@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/OwenCoogan/api_memlane_v3/issues"
   },
-  "homepage": "https://github.com/OwenCoogan/api_memlane_v3#readme"
+  "homepage": "https://github.com/OwenCoogan/api_memlane_v3#readme",
+  "dependencies": {
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.18.0",
+    "sequelize-cli": "^6.4.1"
+  }
 }
