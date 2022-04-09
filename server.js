@@ -1,3 +1,5 @@
+const routes = require('./routes');
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -22,6 +24,7 @@ class ServerClass{
       this.server.use(bodyParser.json({limit: '20mb'}));
       this.server.use(bodyParser.urlencoded({ extended: true }));
       this.server.use(cookieParser(process.env.COOKIE_SECRET));
+      this.server.use('/api', routes);
       this.config();
     }
     config(){
