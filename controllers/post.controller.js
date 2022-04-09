@@ -24,7 +24,6 @@ const readOne = async (req, res) => {
       id: req.params.id
     }
   });
-
   return post;
 }
 
