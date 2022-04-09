@@ -1,0 +1,20 @@
+{
+  "name": "api_memlane_v3",
+  "version": "1.0.0",
+  "description": "A node api made for the memorylane app in vueJS",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OwenCoogan/api_memlane_v3.git"
+  },
+  "author": "Owen Coogan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OwenCoogan/api_memlane_v3/issues"
+  },
+  "homepage": "https://github.com/OwenCoogan/api_memlane_v3#readme"
+}
