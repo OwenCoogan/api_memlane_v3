@@ -11,7 +11,11 @@ class ServerClass{
     this.port = process.env.PORT;
     }
     init(){
-      console.log(process.env)
+
+      const ApiRouterClass = require('./routes/api.router');
+      const apiRouter = new ApiRouterClass();
+
+
       this.server.use( (req, res, next) => {
           const allowedOrigins = process.env.ALLOWED_ORIGINS.split(', ');
           const origin = req.headers.origin;
@@ -21,10 +25,11 @@ class ServerClass{
           res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
           next();
       });
+
       this.server.use(bodyParser.json({limit: '20mb'}));
       this.server.use(bodyParser.urlencoded({ extended: true }));
       this.server.use(cookieParser(process.env.COOKIE_SECRET));
-      this.server.use('/api', routes);
+      this.server.use('/v1', apiRouter.init());
       this.config();
     }
     config(){
