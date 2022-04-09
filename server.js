@@ -11,9 +11,10 @@ class ServerClass{
     this.port = process.env.PORT;
     }
     init(){
-
       const ApiRouterClass = require('./routes/api.router');
       const apiRouter = new ApiRouterClass();
+      const AuthRouterClass = require('./routes/auth.router');
+      const authRouter = new AuthRouterClass();
 
 
       this.server.use( (req, res, next) => {
@@ -29,7 +30,10 @@ class ServerClass{
       this.server.use(bodyParser.json({limit: '20mb'}));
       this.server.use(bodyParser.urlencoded({ extended: true }));
       this.server.use(cookieParser(process.env.COOKIE_SECRET));
+
       this.server.use('/v1', apiRouter.init());
+      this.server.use('/auth', authRouter.init());
+
       this.config();
     }
     config(){

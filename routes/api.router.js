@@ -12,19 +12,32 @@ class RouterClass{
             .then( apiResponse => res.json( { data: apiResponse, err: null } ))
             .catch( apiError => res.json( { data: null, err: apiError } ))
         })
+        this.router.get('/posts/:id', ( req,res) => {
+            Controllers.post.readOne(req)
+            .then( apiResponse => res.json( { data: apiResponse, err: null } ))
+            .catch( apiError => res.json( { data: null, err: apiError } ))
+        })
         this.router.post('/post/create', (req, res) => {
             Controllers.post.createOne(req)
             .then(req => console.log(req))
             .then( apiResponse => res.json( { data: apiResponse, err: null }))
             .catch( apiError => res.json( { data: null, err: apiError } ))
         })
-        this.router.get('/posts/', ( res) => {
-            Controllers.post.readAll()
+
+        this.router.get('/post/:id/comments', (req, res) => {
+            Controllers.comment.readAll(req)
             .then( apiResponse => res.json( { data: apiResponse, err: null } ))
             .catch( apiError => res.json( { data: null, err: apiError } ))
         })
-        this.router.get('/posts/:id', ( req,res) => {
-            Controllers.post.readOne(req)
+
+        this.router.post('/post/:id/comments/add', (req, res) => {
+            Controllers.comment.readAll(req)
+            .then( apiResponse => res.json( { data: apiResponse, err: null } ))
+            .catch( apiError => res.json( { data: null, err: apiError } ))
+        })
+
+        this.router.post('/post/:id/comments/:id/delete', (req, res) => {
+            Controllers.comment.delete(req)
             .then( apiResponse => res.json( { data: apiResponse, err: null } ))
             .catch( apiError => res.json( { data: null, err: apiError } ))
         })
