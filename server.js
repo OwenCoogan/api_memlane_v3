@@ -1,12 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = express();
+const cookieParser = require('cookie-parser');
+require('dotenv').config();
+
 class ServerClass{
   constructor(){
     this.server = express();
     this.port = process.env.PORT;
     }
     init(){
+      console.log(process.env)
       this.server.use( (req, res, next) => {
           const allowedOrigins = process.env.ALLOWED_ORIGINS.split(', ');
           const origin = req.headers.origin;
@@ -25,15 +28,11 @@ class ServerClass{
       this.launch();
     }
     launch(){
-          this.server.listen( this.port, options , () => {
+          this.server.listen( this.port, () => {
               console.log({
-                  node: `http:s//localhost:${this.port}`,
-                  db: db.url,
+                  node: `http://localhost:${this.port}`,
               })
           })
-      .catch( dbError => {
-          console.log(dbError)
-      })
   }
 
 }
