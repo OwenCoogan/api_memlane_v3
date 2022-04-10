@@ -23,14 +23,10 @@ class RouterClass{
 
         this.router.post('/post/:id/comment/add', (req, res) => {
             Controllers.comment.createOne(req)
-            .then( apiResponse => res.json( { data: apiResponse, err: null } ))
-            .catch( apiError => res.json( { data: null, err: apiError } ))
         })
 
         this.router.post('/post/:id/comment/:id/delete', (req, res) => {
-            Controllers.comment.delete(req)
-            .then( apiResponse => res.json( { data: apiResponse, err: null } ))
-            .catch( apiError => res.json( { data: null, err: apiError } ))
+            Controllers.comment.deleteOne(req)
         })
     }
 
