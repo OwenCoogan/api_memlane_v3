@@ -13,6 +13,21 @@ Once this is done :
   npm run start
 
 
+# Dependecies
+
+NodeJs
+Express
+Postgres
+Sequelize
+cookie-parser
+axios
+body-parser
+
+** Only One ressource was made without the ORM , the "fun" controller which listed methods where third party apis are called.
+  I didn't have any need for any outgoing api calls, but there it is anyway ( edit : I might use this Api in my user seeds )
+**
+
+
 # Description
 
 This api is used to do some stuff that I'll explain at the last second.

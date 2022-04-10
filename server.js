@@ -1,5 +1,5 @@
 const routes = require('./routes');
-
+global.__basedir = __dirname;
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -15,6 +15,8 @@ class ServerClass{
       const apiRouter = new ApiRouterClass();
       const AuthRouterClass = require('./routes/auth.router');
       const authRouter = new AuthRouterClass();
+      const UserRouterClass = require('./routes/user.router');
+      const userRouter = new UserRouterClass();
 
 
       this.server.use( (req, res, next) => {
@@ -33,6 +35,7 @@ class ServerClass{
 
       this.server.use('/v1', apiRouter.init());
       this.server.use('/auth', authRouter.init());
+      this.server.use('/user', userRouter.init());
 
       this.config();
     }

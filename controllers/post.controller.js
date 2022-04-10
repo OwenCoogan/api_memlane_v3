@@ -3,19 +3,19 @@ const { Post, Comment } = require('../models');
 
 const createOne = async (req, res) => {
   const { title, content, userId, latitude, longitude } = req.body;
-  console.log(req.body)
   const post = await Post.create({
     title,
     content,
     latitude,
     longitude,
     userId: userId,
-  });
-  return post;
+  })
+  .then( apiResponse => res.json( { data: apiResponse, err: null }))
+  .catch( apiError => res.json( { data: null, err: apiError } ))
 }
 
 const readAll = async (req, res) => {
-  const posts = await Post.findAll({
+  await Post.findAll({
     include: [
       {
         model: Comment,
@@ -23,11 +23,12 @@ const readAll = async (req, res) => {
       },
     ]
   })
-  return posts;
+  .then( apiResponse => res.json( { data: apiResponse, err: null } ))
+  .catch( apiError => res.json( { data: null, err: apiError } ))
 }
 
 const readOne = async (req, res) => {
-  const post = await Post.findOne({
+  await Post.findOne({
     where: {
       id: req.params.id
     },
@@ -37,13 +38,11 @@ const readOne = async (req, res) => {
         as: 'comments'
       },
     ]
-  });
-  return post;
+  })
 }
-
 const updateOne = async (req, res) => {
   const { title, content, date, author_id } = req.body;
-  const post = await Post.update({
+  await Post.update({
     title,
     content,
     date,
@@ -52,9 +51,9 @@ const updateOne = async (req, res) => {
     where: {
       id: req.params.id
     }
-  });
-
-  return post;
+  })
+  .then( apiResponse => res.json( { data: apiResponse, err: null } ))
+  .catch( apiError => res.json( { data: null, err: apiError } ))
 }
 
 const deleteOne = async (req, res) => {
