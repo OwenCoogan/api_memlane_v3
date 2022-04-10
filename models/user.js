@@ -6,6 +6,9 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
+    validPassword(password) {
+      return bcrypt.compareSync(password, this.password);
+    }
     static associate(models) {
       User.hasMany(models.Post, {
         foreignKey: 'userId',
@@ -37,6 +40,7 @@ module.exports = (sequelize, DataTypes) => {
           user.password = await bcrypt.hash(user.password, 10);
         }
       },
+
     },
     modelName: 'User',
   });
