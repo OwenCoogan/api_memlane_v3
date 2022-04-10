@@ -1,9 +1,8 @@
-const routes = require('./routes');
-global.__basedir = __dirname;
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
+global.__basedir = __dirname;
 
 class ServerClass{
   constructor(){
