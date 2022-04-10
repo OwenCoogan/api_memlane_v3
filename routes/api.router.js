@@ -7,8 +7,14 @@ class RouterClass{
     }
 
     routes(){
+        this.router.get('/wtf/', (req, res) => {
+            Controllers.fun.duneQuote(req,res)
+            .then( apiResponse => res.json( { data: [apiResponse], err: null } ))
+            .catch( apiError => res.json( { data: null, err: apiError } ))
+        })
+
         this.router.get('/posts/', (req, res) => {
-            Controllers.post.readAll()
+            Controllers.post.readAll(req, res)
             .then( apiResponse => res.json( { data: apiResponse, err: null } ))
             .catch( apiError => res.json( { data: null, err: apiError } ))
         })
@@ -30,13 +36,13 @@ class RouterClass{
             .catch( apiError => res.json( { data: null, err: apiError } ))
         })
 
-        this.router.post('/post/:id/comments/add', (req, res) => {
-            Controllers.comment.readAll(req)
+        this.router.post('/post/:id/comment/add', (req, res) => {
+            Controllers.comment.createOne(req)
             .then( apiResponse => res.json( { data: apiResponse, err: null } ))
             .catch( apiError => res.json( { data: null, err: apiError } ))
         })
 
-        this.router.post('/post/:id/comments/:id/delete', (req, res) => {
+        this.router.post('/post/:id/comment/:id/delete', (req, res) => {
             Controllers.comment.delete(req)
             .then( apiResponse => res.json( { data: apiResponse, err: null } ))
             .catch( apiError => res.json( { data: null, err: apiError } ))

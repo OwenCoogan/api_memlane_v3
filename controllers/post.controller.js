@@ -1,5 +1,5 @@
 
-const { Post } = require('../models');
+const { Post, Comment } = require('../models');
 
 const createOne = async (req, res) => {
   const { title, content, date, author_id } = req.body;
@@ -9,12 +9,13 @@ const createOne = async (req, res) => {
     date,
     authorId: author_id,
   });
-
   return post;
 }
 
 const readAll = async (req, res) => {
-  const posts = await Post.findAll()
+  const posts = await Post.findAll({
+    include: Comment
+  })
   return posts;
 }
 
@@ -22,7 +23,8 @@ const readOne = async (req, res) => {
   const post = await Post.findOne({
     where: {
       id: req.params.id
-    }
+    },
+    include: Comment
   });
   return post;
 }
