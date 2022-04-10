@@ -1,14 +1,27 @@
 const { Comment } = require('../models');
 const createOne = async (req, res) => {
   const { comment, postId, userId } = req.body;
-  const newComment = await Comment.create({
+  await Comment.create({
     comment,
     postId,
     userId
-  });
-  return newComment;
+  })
+  .then( apiResponse => res.json( { data: apiResponse, err: null } ))
+  .catch( apiError => res.json( { data: null, err: apiError } ))
+}
+
+const deleteOne = async (req, res) => {
+  const { postId } = req.body;
+  await Comment.delete({
+    where: {
+      id: postId
+    }
+  })
+  .then( apiResponse => res.json( { data: apiResponse, err: null } ))
+  .catch( apiError => res.json( { data: null, err: apiError } ))
 }
 
 module.exports = {
-  createOne
+  createOne,
+  deleteOne
 }
