@@ -29,14 +29,12 @@ module.exports = (sequelize, DataTypes) => {
     hooks: {
       beforeCreate: async (user, options) => {
         if (user.password) {
-         const salt = await bcrypt.genSaltSync(10, 'secret');
-         user.password = bcrypt.hashSync(user.password, salt);
+          user.password = await bcrypt.hash(user.password, 10);
         }
       },
       beforeUpdate: async  (user, options) => {
         if (user.password) {
-          const salt = await bcrypt.genSaltSync(10, 'secret');
-          user.password = bcrypt.hashSync(user.password, salt);
+          user.password = await bcrypt.hash(user.password, 10);
         }
       },
     },
