@@ -1,41 +1,53 @@
-const Models = require('../models/index');
+const { User } = require('../models');
 
-const createOne = req => {
-  return new Promise( (resolve, reject) => {
-    console.log(users)
-      Models.user.create(req.body)
-      .then( data => resolve(data) )
-      .catch( err => reject(err) )
-  })
+const jwt = require('jsonwebtoken');
+const generateAccessToken = (email, id) => {
+  return jwt.sign({ email ,id }, 'session', { expiresIn: '100000000000s' }
+  );
 }
-
-const readAll = async (req, res) => {
-  try {
-      const users = await Models.users.findAll();
-      console.log(users)
-      return res.status(200).json({ users });
-  } catch (error) {
-      return res.status(500).send(error.message);
+const createOne = async (req) => {
+  const { name, email, password } = req.body;
+  const existingUser = await User.findOne({
+    where: { email: email }
+  });
+  if(!existingUser){
+    const user = await User.create({
+      name,
+      email,
+      password
+    });
+    console
+  return user
+  }
+  else{
+    return res.status(400)
   }
 }
 
-const readOne = async (req, res) => {
-
+const readAll = async () => {
+      const users = await User.findAll();
+      console.log(users)
+      return users;
 }
 
-const updateOne = async (req, res) => {
-
+const login = async (req, res) => {
+  const foundUser = await User.findOne({
+    where: { email: req.body.email }
+  });
+  if(foundUser.validPassword(password)) {
+    const { email,id } = foundUser;
+    const token = generateAccessToken(email, id);
+    return res.json({ access_token: token });
+  }
 }
 
-const deleteOne = async (req, res) => {
 
-}
+
+
 
 module.exports = {
         createOne,
         readAll,
-        readOne,
-        updateOne,
-        deleteOne
+        login
     }
 
