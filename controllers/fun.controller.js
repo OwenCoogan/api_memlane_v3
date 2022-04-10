@@ -1,14 +1,15 @@
 const axios = require('axios');
 
-const duneQuote = async (req,res) => {
-  await axios.get('https://the-dune-api.herokuapp.com/quotes/10')
-  .then(response => {
-    return response
-  })
+const RickAndMortyApi = async (req,res) => {
+  try {
+    return await axios.get('https://rickandmortyapi.com/api')
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 
 module.exports = {
-  duneQuote
+  RickAndMortyApi
 }
 

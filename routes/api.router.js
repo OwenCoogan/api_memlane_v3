@@ -8,8 +8,8 @@ class RouterClass{
 
     routes(){
         this.router.get('/wtf/', (req, res) => {
-            Controllers.fun.duneQuote(req,res)
-            .then( apiResponse => res.json( { data: [apiResponse], err: null } ))
+            Controllers.fun.RickAndMortyApi(req,res)
+            .then( apiResponse => res.json( { data: apiResponse.data, err: null } ))
             .catch( apiError => res.json( { data: null, err: apiError } ))
         })
 
