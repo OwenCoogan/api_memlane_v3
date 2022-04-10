@@ -2,10 +2,13 @@
 const { Post, Comment } = require('../models');
 
 const createOne = async (req, res) => {
-  const { title, content, userId } = req.body;
+  const { title, content, userId, latitude, longitude } = req.body;
+  console.log(req.body)
   const post = await Post.create({
     title,
     content,
+    latitude,
+    longitude,
     userId: userId,
   });
   return post;
