@@ -2,19 +2,23 @@
 const { Post, Comment } = require('../models');
 
 const createOne = async (req, res) => {
-  const { title, content, date, author_id } = req.body;
+  const { title, content, userId } = req.body;
   const post = await Post.create({
     title,
     content,
-    date,
-    authorId: author_id,
+    userId: userId,
   });
   return post;
 }
 
 const readAll = async (req, res) => {
   const posts = await Post.findAll({
-    include: Comment
+    include: [
+      {
+        model: Comment,
+        as: 'comments'
+      },
+    ]
   })
   return posts;
 }
@@ -24,7 +28,12 @@ const readOne = async (req, res) => {
     where: {
       id: req.params.id
     },
-    include: Comment
+    include: [
+      {
+        model: Comment,
+        as: 'comments'
+      },
+    ]
   });
   return post;
 }

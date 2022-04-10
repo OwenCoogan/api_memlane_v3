@@ -9,7 +9,7 @@ class RouterClass{
     routes(){
         this.router.get('/wtf/', (req, res) => {
             Controllers.fun.RickAndMortyApi(req,res)
-            .then( apiResponse => res.json( { data: apiResponse.data, err: null } ))
+            .then( apiResponse => res.json( { data: apiResponse.data.results, err: null } ))
             .catch( apiError => res.json( { data: null, err: apiError } ))
         })
 
