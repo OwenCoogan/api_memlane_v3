@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { Image } = require('../models');
+const { Image } = require('../../models');
 const uploadProfilePicture = async (req, res) => {
   try {
     if (req.file == undefined) {

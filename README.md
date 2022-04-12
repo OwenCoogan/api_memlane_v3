@@ -2,9 +2,16 @@
 
 Owen Coogan, M2Dev ECV Digital ( Powered by Coffee & Github Copilot ’)
 
+
+Chores :
+
+  Typescript for error handling & easier management of file uploads
+  Role management
+  Refacto of api router
+
 # Requirements
 
-Either run with Docker & run the following commands on first install :
+Either run with Docker & run the following commands on first install ( The container has PSQL and a pgadmin instance for development purposes )
 
   npm run build-db && npm run init-db && npm run prep-db
 
