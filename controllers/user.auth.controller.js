@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User,Image } = require('../models');
 
 const jwt = require('jsonwebtoken');
 
@@ -26,9 +26,17 @@ const createOne = async (req) => {
   }
 }
 
-const readAll = async () => {
-      const users = await User.findAll();
-      return users;
+const readAll = async (req,res) => {
+      await User.findAll({
+        include: [
+          {
+            model: Image,
+            as: 'images'
+          },
+        ]
+      })
+      .then( apiResponse => res.json( { data: apiResponse, err: null } ))
+      .catch( apiError => res.json( { data: null, err: apiError } ))
 }
 
 const login = async (req, res) => {

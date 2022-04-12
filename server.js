@@ -1,9 +1,8 @@
-const routes = require('./routes');
-global.__basedir = __dirname;
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
+global.__basedir = __dirname;
 
 class ServerClass{
   constructor(){
@@ -17,6 +16,8 @@ class ServerClass{
       const authRouter = new AuthRouterClass();
       const UserRouterClass = require('./routes/user.router');
       const userRouter = new UserRouterClass();
+      const UploadRouterClass = require('./routes/upload.router');
+      const uploadRouter = new UploadRouterClass();
 
 
       this.server.use( (req, res, next) => {
@@ -36,6 +37,7 @@ class ServerClass{
       this.server.use('/v1', apiRouter.init());
       this.server.use('/auth', authRouter.init());
       this.server.use('/user', userRouter.init());
+      this.server.use('/upload', uploadRouter.init());
 
       this.config();
     }

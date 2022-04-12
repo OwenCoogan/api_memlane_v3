@@ -8,9 +8,7 @@ class RouterClass{
 
     routes(){
         this.router.get('/users', (req, res) => {
-            Controllers.user.readAll()
-            .then( apiResponse => res.json( { data: apiResponse, err: null } ))
-            .catch( apiError => res.json( { data: null, err: apiError } ))
+            Controllers.user.readAll(req,res)
         })
         this.router.post('/user/create', (req, res) => {
             Controllers.user.createOne(req)

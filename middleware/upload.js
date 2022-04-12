@@ -6,13 +6,14 @@ const imageFilter = (req, file, cb) => {
     cb("Please upload only images.", false);
   }
 };
-var storage = multer.diskStorage({
+let storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, __basedir + "/resources/static/assets/uploads/");
+    let destinationDirectory= req.path.includes('post') === true ? 'post' : 'user';
+    cb(null, __basedir + `/resources/static/assets/uploads/${destinationDirectory}`);
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-bezkoder-${file.originalname}`);
+    cb(null, `${Date.now()}--${file.originalname}`);
   },
 });
-var uploadFile = multer({ storage: storage, fileFilter: imageFilter });
+let uploadFile = multer({ storage: storage, fileFilter: imageFilter });
 module.exports = uploadFile;
