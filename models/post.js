@@ -19,10 +19,9 @@ module.exports = (sequelize, DataTypes) => {
       })
       Post.hasMany(models.Image, {
         foreignKey: 'imageId',
+        as: 'images',
+        onDelete: 'CASCADE',
         constraints: false,
-        scope: {
-          commentableType: 'post'
-        }
       });
     }
   }

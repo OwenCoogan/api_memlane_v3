@@ -22,12 +22,10 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
       });
 
-      User.hasOne(models.Image, {
+      User.hasMany(models.Image, {
         foreignKey: 'imageId',
+        as: 'images',
         constraints: false,
-        scope: {
-          commentableType: 'profile'
-        }
       });
     }
   }
