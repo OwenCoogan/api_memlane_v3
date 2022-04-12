@@ -11,6 +11,15 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
+      imageId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+      },
+      imageType: {
+        type: Sequelize.STRING
+      },
+
       type: {
         type: Sequelize.STRING
       },

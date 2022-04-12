@@ -21,6 +21,14 @@ module.exports = (sequelize, DataTypes) => {
         as: 'comments',
         onDelete: 'CASCADE',
       });
+
+      User.hasOne(models.Image, {
+        foreignKey: 'imageId',
+        constraints: false,
+        scope: {
+          commentableType: 'profile'
+        }
+      });
     }
   }
   User.init({

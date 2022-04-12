@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User,Image } = require('../models');
 
 const jwt = require('jsonwebtoken');
 
@@ -27,7 +27,16 @@ const createOne = async (req) => {
 }
 
 const readAll = async () => {
-      const users = await User.findAll();
+      const users = await User.findAll(
+        {
+          include: [
+            {
+              model: Image,
+              as: 'profileImage',
+            },
+          ]
+        }
+      );
       return users;
 }
 

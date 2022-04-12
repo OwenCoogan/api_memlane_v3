@@ -17,6 +17,13 @@ module.exports = (sequelize, DataTypes) => {
         as: 'author',
         onDelete: 'CASCADE',
       })
+      Post.hasMany(models.Image, {
+        foreignKey: 'imageId',
+        constraints: false,
+        scope: {
+          commentableType: 'post'
+        }
+      });
     }
   }
   Post.init({

@@ -5,7 +5,7 @@ const uploadFiles = async (req, res) => {
   try {
     console.log(req.file);
     if (req.file == undefined) {
-      return res.send(`You must select a file.`);
+      return res.json(`You must select a file.`);
     }
     Image.create({
       type: req.file.mimetype,
@@ -22,7 +22,7 @@ const uploadFiles = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    return res.send(`Error when trying upload images: ${error}`);
+    return res.json(`Error when trying upload images: ${error}`);
   }
 };
 module.exports = {
