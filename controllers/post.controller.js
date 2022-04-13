@@ -99,13 +99,13 @@ const AddPicture = async (req, res) => {
       type: req.file.mimetype,
       imageType: 'post',
       imageId: req.params.id,
-      name: req.file.originalname,
+      name: req.file.filename,
       data: fs.readFileSync(
         __basedir + `/resources/static/assets/uploads/post/${req.file.filename}`
       ),
     }).then((image) => {
       fs.writeFileSync(
-        __basedir + `/resources/static/assets/tmp/post/${image.name}`,
+        __basedir + `/resources/static/assets/tmp/post/${req.file.filename}`,
         image.data
       );
       return res.send(`File has been uploaded.`);
