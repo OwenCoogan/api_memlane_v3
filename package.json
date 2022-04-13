@@ -1,6 +1,6 @@
 {
   "name": "api_memlane_v3",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "A node api made for the memorylane app in vueJS",
   "main": "server.js",
   "scripts": {
