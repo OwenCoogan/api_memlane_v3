@@ -8,6 +8,8 @@ Chores :
   Typescript for error handling & easier management of file uploads
   Role management
   Refacto of api router
+  Write tests
+
 
 # Requirements
 

@@ -21,7 +21,6 @@ const uploadProfilePicture = async (req, res) => {
       return res.send(`File has been uploaded.`);
     });
   } catch (error) {
-    console.log(error);
     return res.json(`Error when trying upload images: ${error}`);
   }
 };

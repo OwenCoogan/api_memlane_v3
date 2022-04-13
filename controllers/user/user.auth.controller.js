@@ -3,23 +3,23 @@ const { User,Image } = require('../../models');
 const jwt = require('jsonwebtoken');
 
 const generateAccessToken = (email, id) => {
-  return jwt.sign({ email ,id }, 'session', { expiresIn: '100000000000s' }
+  return jwt.sign({ email ,id }, 'MemoryLaneCookie', { expiresIn: '100000000000s' }
   );
 }
 
-const createOne = async (req) => {
+const createOne = async (req,res) => {
   const { name, email, password } = req.body;
   const existingUser = await User.findOne({
     where: { email: email }
   });
   if(!existingUser){
-    const user = await User.create({
+    await User.create({
       name,
       email,
       password
-    });
-    console
-  return user
+    })
+    .then( apiResponse => res.json( { data: apiResponse, err: null } ))
+    .catch( err => res.json( { data: null, err: err } ))
   }
   else{
     return res.status(400)
@@ -46,8 +46,23 @@ const login = async (req, res) => {
   });
   if(foundUser.validPassword(password)) {
     const { email,id } = foundUser;
-    const token = generateAccessToken(email,id);
-    return token;
+    const token =  generateAccessToken(email,id);
+    return res.json({
+      data: {
+        token,
+        user: {
+          id,
+          email,
+          name: foundUser.name
+        }
+      },
+      err: null
+    });
+  }
+  else{
+    return res.json({
+      errorCode: 'Invalid password'
+    });
   }
 }
 
