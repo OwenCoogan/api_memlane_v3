@@ -33,7 +33,7 @@ class ServerClass{
       this.server.use(bodyParser.json({limit: '20mb'}));
       this.server.use(bodyParser.urlencoded({ extended: true }));
       this.server.use(cookieParser(process.env.COOKIE_SECRET));
-
+      this.server.use('/resources', express.static(__dirname + '/resources'))
       this.server.use('/v1', apiRouter.init());
       this.server.use('/auth', authRouter.init());
       this.server.use('/user', userRouter.init());

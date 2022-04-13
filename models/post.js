@@ -29,8 +29,8 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     content: DataTypes.TEXT,
     userId: DataTypes.INTEGER,
-    latitude: DataTypes.INTEGER,
-    longitude: DataTypes.INTEGER,
+    latitude: DataTypes.DECIMAL,
+    longitude: DataTypes.DECIMAL,
   }, {
     sequelize,
     modelName: 'Post',

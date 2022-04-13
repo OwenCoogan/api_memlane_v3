@@ -2,12 +2,12 @@
 const { Post, Comment, Image } = require('../models');
 const fs = require("fs");
 const createOne = async (req, res) => {
-  const { title, content, userId, latitude, longitude } = req.body;
-  const post = await Post.create({
+  const { title, content, userId, latitude, longitude  } = req.body;
+  await Post.create({
     title,
     content,
-    latitude,
-    longitude,
+    latitude:latitude,
+    longitude:longitude,
     userId: userId,
   })
   .then( apiResponse => res.json( { data: apiResponse, err: null }))
@@ -53,12 +53,14 @@ const readOne = async (req, res) => {
   .catch( apiError => res.json( { data: null, err: apiError } ))
 }
 const updateOne = async (req, res) => {
-  const { title, content, date, author_id } = req.body;
+  const { title, content, userId, latitude, longitude  } = req.body;
+  const point = { type: 'Point', coordinates: [latitude, longitude]};
   await Post.update({
     title,
     content,
-    date,
-    authorId: author_id,
+    latitude,
+    longitude,
+    userId: userId,
   }, {
     where: {
       id: req.params.id
@@ -97,14 +99,13 @@ const AddPicture = async (req, res) => {
       type: req.file.mimetype,
       imageType: 'post',
       imageId: req.params.id,
-      name: req.file.originalname,
+      name: req.file.filename,
       data: fs.readFileSync(
         __basedir + `/resources/static/assets/uploads/post/${req.file.filename}`
       ),
     }).then((image) => {
-      console.log(image)
       fs.writeFileSync(
-        __basedir + `/resources/static/assets/tmp/post/${image.name}`,
+        __basedir + `/resources/static/assets/tmp/post/${req.file.filename}`,
         image.data
       );
       return res.send(`File has been uploaded.`);

@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { Image } = require('../models');
+const { Image } = require('../../models');
 const uploadProfilePicture = async (req, res) => {
   try {
     if (req.file == undefined) {
@@ -21,7 +21,6 @@ const uploadProfilePicture = async (req, res) => {
       return res.send(`File has been uploaded.`);
     });
   } catch (error) {
-    console.log(error);
     return res.json(`Error when trying upload images: ${error}`);
   }
 };
