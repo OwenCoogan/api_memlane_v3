@@ -8,7 +8,6 @@ const imageFilter = (req, file, cb) => {
 };
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    // Chore : add middleware & for future types of file uploads (video, audio, etc)
     let destinationDirectory= req.path.includes('post') === true ? 'post' : 'user';
     cb(null, __basedir + `/resources/static/assets/uploads/${destinationDirectory}`);
   },

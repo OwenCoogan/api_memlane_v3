@@ -1,6 +1,8 @@
 
 const { Post, Comment, Image } = require('../models');
+const { Op } = require("sequelize");
 const fs = require("fs");
+const rangeCheck = require('../middleware/rangeCheck');
 const createOne = async (req, res) => {
   const { title, content, userId, latitude, longitude  } = req.body;
   await Post.create({
@@ -15,22 +17,49 @@ const createOne = async (req, res) => {
 }
 
 const readAll = async (req, res) => {
-  /* Middleware Check authorization : TODO  */
-  await Post.findAll({
-    include: [
-      {
-        model: Comment,
-        as: 'comments'
+  if(req.body){
+    const range = rangeCheck(req);
+    await Post.findAll({
+      where: {
+        latitude: {
+          [Op.between]: [range.latitude.min, range.latitude.max]
+        },
+        longitude: {
+          [Op.between]: [range.longitude.min, range.longitude.max]
+        }
       },
-      {
-        model: Image,
-        as: 'images'
-      },
+      include: [
+        {
+          model: Comment,
+          as: 'comments'
+        },
+        {
+          model: Image,
+          as: 'images'
+        },
 
-    ]
-  })
-  .then( apiResponse => res.json( { data: apiResponse, err: null } ))
-  .catch( apiError => res.json( { data: null, err: apiError } ))
+      ]
+    })
+    .then( apiResponse => res.json( { data: apiResponse, err: null } ))
+    .catch( apiError => res.json( { data: null, err: apiError } ))
+  }
+  else{
+    await Post.findAll({
+      include: [
+        {
+          model: Comment,
+          as: 'comments'
+        },
+        {
+          model: Image,
+          as: 'images'
+        },
+
+      ]
+    })
+    .then( apiResponse => res.json( { data: apiResponse, err: 'You should specify gps position' } ))
+    .catch( apiError => res.json( { data: null, err: apiError } ))
+  }
 }
 
 const readOne = async (req, res) => {
