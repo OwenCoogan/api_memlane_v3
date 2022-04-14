@@ -21,11 +21,11 @@ class RouterClass{
         })
 
         this.router.post('/post/:id/comment/add', (req, res) => {
-            Controllers.comment.createOne(req)
+            Controllers.comment.createOne(req,res)
         })
 
         this.router.post('/post/:id/comment/:id/delete', (req, res) => {
-            Controllers.comment.deleteOne(req)
+            Controllers.comment.deleteOne(req,res)
         })
     }
 

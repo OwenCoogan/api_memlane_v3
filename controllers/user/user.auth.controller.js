@@ -31,7 +31,7 @@ const readAll = async (req,res) => {
         include: [
           {
             model: Image,
-            as: 'images'
+            as: 'images',
           },
         ]
       })
