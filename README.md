@@ -43,4 +43,6 @@ This api is used to do some stuff that I'll explain at the last second.
 
 # Last Second
 
+This api is used for creating / editing geolocated posts, meant to be
+
 

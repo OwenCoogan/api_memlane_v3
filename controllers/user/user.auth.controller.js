@@ -1,7 +1,6 @@
 const { User,Image } = require('../../models');
 
 const jwt = require('jsonwebtoken');
-
 const generateAccessToken = (email, id) => {
   return jwt.sign({ email ,id }, 'MemoryLaneCookie', { expiresIn: '100000000000s' }
   );
@@ -16,7 +15,8 @@ const createOne = async (req,res) => {
     await User.create({
       name,
       email,
-      password
+      password,
+      role: 'user'
     })
     .then( apiResponse => res.json( { data: apiResponse, err: null } ))
     .catch( err => res.json( { data: null, err: err } ))
@@ -27,16 +27,26 @@ const createOne = async (req,res) => {
 }
 
 const readAll = async (req,res) => {
-      await User.findAll({
-        include: [
-          {
-            model: Image,
-            as: 'images'
-          },
-        ]
-      })
-      .then( apiResponse => res.json( { data: apiResponse, err: null } ))
-      .catch( apiError => res.json( { data: null, err: apiError } ))
+  const adminUser = await User.findOne({
+    where: {
+      role: 'super-admin'
+    }
+  });
+  if(adminUser){
+    await User.findAll({
+      include: [
+        {
+          model: Image,
+          as: 'images'
+        },
+      ]
+    })
+    .then( apiResponse => res.json( { data: apiResponse, err: null } ))
+    .catch( apiError => res.json( { data: null, err: apiError } ))
+  }
+  else{
+    return res.status(400)
+  }
 }
 
 const login = async (req, res) => {
@@ -61,7 +71,7 @@ const login = async (req, res) => {
   }
   else{
     return res.json({
-      errorCode: 'Invalid password'
+      errorCode: 'Server Error'
     });
   }
 }
