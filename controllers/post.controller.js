@@ -15,6 +15,7 @@ const createOne = async (req, res) => {
 }
 
 const readAll = async (req, res) => {
+  /* Middleware Check authorization : TODO  */
   await Post.findAll({
     include: [
       {
