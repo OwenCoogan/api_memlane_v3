@@ -17,6 +17,7 @@ const createOne = async (req, res) => {
 }
 
 const readAll = async (req, res) => {
+<<<<<<< HEAD
   if(req.body){
     const { latitude, longitude } = req.body;
     const range = rangeCheck(req);
@@ -28,6 +29,18 @@ const readAll = async (req, res) => {
         longitude: {
           [Op.between]: [range.longitude.min, range.longitude.max]
         }
+=======
+  /* Middleware Check authorization : TODO  */
+  await Post.findAll({
+    include: [
+      {
+        model: Comment,
+        as: 'comments'
+      },
+      {
+        model: Image,
+        as: 'images'
+>>>>>>> bc82ceb7be5813ba431d079235108c517084e133
       },
       include: [
         {
