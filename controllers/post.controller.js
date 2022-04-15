@@ -3,6 +3,7 @@ const { Post, Comment, Image,User } = require('../models');
 const { Op } = require("sequelize");
 const fs = require("fs");
 const rangeCheck = require('../middleware/rangeCheck.middleware');
+
 const createOne = async (req, res) => {
   const { title, content, userId, latitude, longitude  } = req.body;
   await Post.create({
@@ -82,6 +83,7 @@ const readOne = async (req, res) => {
   .then( apiResponse => res.json( { data: apiResponse, err: null } ))
   .catch( apiError => res.json( { data: null, err: apiError } ))
 }
+
 const updateOne = async (req, res) => {
   const author = await User.findOne({
     where: { id: req.body.userId }
@@ -89,6 +91,12 @@ const updateOne = async (req, res) => {
   const post = await Post.findOne({
     where: { id: req.params.id }
   })
+  if(!post){
+    return res.json({
+      data: null,
+      err: "Post not Found"
+    })
+  }
   if(author.id = post.userId){
     const updateSuccess = await Post.update({
       ...req.body
@@ -124,14 +132,24 @@ const deleteOne = async (req, res) => {
   const post = await Post.findOne({
     where: { id: req.params.id }
   })
-  if(author.id = post.userId){
+  if(!post){
+    return res.json({
+      data: null,
+      err: "Post not Found"
+    })
+  }
+  if(author.id = post.userId ){
+    console.log("author")
     const deleteSuccess = await Post.destroy({
       where: {
         id: req.params.id
       }
     });
     if(deleteSuccess) {
-      return res.status(204).json();
+      res.json({
+        data: deleteSuccess,
+        err: null
+      })
     } else {
       res
       .status(500)

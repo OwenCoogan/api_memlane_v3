@@ -17,6 +17,12 @@ const updateOne = async (req, res) => {
   const comment = await Comment.findOne({
     where: { id: req.params.commentId }
   })
+  if(!comment){
+    return res.json({
+      data: null,
+      err: "Post not Found"
+    })
+  }
   if(author.id = comment.userId){
     const updateSuccess = await Comment.update({
       ...req.body
@@ -51,6 +57,12 @@ const deleteOne = async (req, res) => {
   const comment = await Comment.findOne({
     where: { id: req.params.id }
   })
+  if(!comment){
+    return res.json({
+      data: null,
+      err: "Post not Found"
+    })
+  }
   if(author.id = comment.userId){
     const deleteSuccess = await Comment.destroy({
       where: {
