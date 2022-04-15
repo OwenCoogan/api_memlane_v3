@@ -5,7 +5,6 @@ module.exports = {
 
     const author = await User.findOne();
     await queryInterface.bulkInsert('Comments', [{
-
       userId: author.id,
       postId: 2,
       comment:
