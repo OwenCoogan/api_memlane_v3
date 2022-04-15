@@ -18,7 +18,6 @@ module.exports = {
       imageType: {
         type: Sequelize.STRING
       },
-
       type: {
         type: Sequelize.STRING
       },

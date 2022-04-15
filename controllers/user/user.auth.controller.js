@@ -1,5 +1,4 @@
 const { User,Image } = require('../../models');
-
 const jwt = require('jsonwebtoken');
 const generateAccessToken = (email, id) => {
   return jwt.sign({ email ,id }, 'MemoryLaneCookie', { expiresIn: '100000000000s' }
@@ -27,26 +26,25 @@ const createOne = async (req,res) => {
 }
 
 const readAll = async (req,res) => {
-  const adminUser = await User.findOne({
-    where: {
-      role: 'super-admin'
-    }
-  });
-  if(adminUser){
     await User.findAll({
       include: [
-        {
-          model: Image,
-          as: 'images'
-        },
       ]
     })
     .then( apiResponse => res.json( { data: apiResponse, err: null } ))
     .catch( apiError => res.json( { data: null, err: apiError } ))
-  }
-  else{
-    return res.status(400)
-  }
+}
+
+const readOne = async (req,res) => {
+  await User.findOne({
+    where: { id: req.body.id }
+  })
+  .then( apiResponse => res.json( { data: {
+    id: apiResponse.id,
+    name: apiResponse.name,
+    email: apiResponse.email,
+    role: apiResponse.role
+  }, err: null } ))
+  .catch( apiError => res.json( { data: null, err: apiError } ))
 }
 
 const login = async (req, res) => {
@@ -79,6 +77,7 @@ const login = async (req, res) => {
 module.exports = {
         createOne,
         readAll,
-        login
+        login,
+        readOne
     }
 

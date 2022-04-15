@@ -1,6 +1,6 @@
 const express = require('express');
 const Controllers = require('../controllers/index');
-const upload = require("../middleware/upload");
+const upload = require("../middleware/upload.middleware");
 
 class RouterClass{
     constructor(){
