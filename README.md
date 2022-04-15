@@ -48,8 +48,7 @@ This api is used to do some stuff that I'll explain at the last second.
 
 This api is used for creating / editing geolocated posts, meant to be consumed by other users on a VueJS app.
  Ideally ( and with more r&d ) I can call posts that are within range of user ,
-
- Note to self : idea for that : passing the current geolocation, declaring an x & y range to create a zone around geolocated position)
+Note to self : idea for that : passing the current geolocation, declaring an x & y range to create a zone around geolocated position)
 PROPOSED SOLUTION IN MIDDLEWARE SECTION
 
 

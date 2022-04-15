@@ -1,9 +1,12 @@
 'use strict';
-
+const { User } = require('../models');
 module.exports = {
   async up (queryInterface, Sequelize) {
+
+    const author = await User.findOne();
     await queryInterface.bulkInsert('Comments', [{
-      userId: 1,
+
+      userId: author.id,
       postId: 2,
       comment:
         "Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh.",

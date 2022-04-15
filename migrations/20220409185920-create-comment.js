@@ -15,7 +15,13 @@ module.exports = {
         type: Sequelize.TEXT
       },
       userId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        references: {
+          model: {
+            tableName: 'Users'
+          },
+          key: 'id',
+        }
       },
       createdAt: {
         allowNull: false,

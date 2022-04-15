@@ -1,9 +1,11 @@
 'use strict';
+const { User } = require('../models');
 
 module.exports = {
   async up (queryInterface, Sequelize) {
+    const author = await User.findOne();
     await queryInterface.bulkInsert('Posts', [{
-      userId: 1,
+      userId: author.id,
       title: 'some dummy title',
       latitude: 48.858093,
       longitude: 2.294694,

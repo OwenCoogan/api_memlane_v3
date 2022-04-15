@@ -2,7 +2,7 @@
 const { Post, Comment, Image } = require('../models');
 const { Op } = require("sequelize");
 const fs = require("fs");
-const rangeCheck = require('../middleware/rangeCheck');
+const rangeCheck = require('../middleware/rangeCheck.middleware');
 const createOne = async (req, res) => {
   const { title, content, userId, latitude, longitude  } = req.body;
   await Post.create({
@@ -17,7 +17,7 @@ const createOne = async (req, res) => {
 }
 
 const readAll = async (req, res) => {
-  if(req.body){
+  if(req.body.latitude){
     const range = rangeCheck(req);
     await Post.findAll({
       where: {
