@@ -1,5 +1,5 @@
 
-const { Post, Comment, Image } = require('../models');
+const { Post, Comment, Image,User } = require('../models');
 const { Op } = require("sequelize");
 const fs = require("fs");
 const rangeCheck = require('../middleware/rangeCheck.middleware');
@@ -83,21 +83,38 @@ const readOne = async (req, res) => {
   .catch( apiError => res.json( { data: null, err: apiError } ))
 }
 const updateOne = async (req, res) => {
-  const { title, content, userId, latitude, longitude  } = req.body;
-  const point = { type: 'Point', coordinates: [latitude, longitude]};
-  await Post.update({
-    title,
-    content,
-    latitude,
-    longitude,
-    userId: userId,
-  }, {
-    where: {
-      id: req.params.id
-    }
+  const author = await User.findOne({
+    where: { id: req.body.userId }
   })
-  .then( apiResponse => res.json( { data: apiResponse, err: null } ))
-  .catch( apiError => res.json( { data: null, err: apiError } ))
+  const post = await Post.findOne({
+    where: { id: req.params.id }
+  })
+  if(author.id = post.userId){
+    const updateSuccess = await Post.update({
+      ...req.body
+    }, {
+      where: {
+        id: req.params.id
+      }
+    });
+    if(updateSuccess!=null){
+      res.json({
+        data: updateSuccess,
+        err: null
+      })
+    }
+    else{
+      res.json({
+        err: "Server Error"
+      })
+    }
+  }
+  else{
+    res.json({
+      data: null,
+      err: "You are not the author of this comment"
+    })
+  }
 }
 
 const deleteOne = async (req, res) => {

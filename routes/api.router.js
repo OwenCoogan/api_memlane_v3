@@ -19,9 +19,15 @@ class RouterClass{
         this.router.post('/post/create', (req, res) => {
             Controllers.post.createOne(req,res)
         })
+        this.router.post('/post/:id/update', (req, res) => {
+            Controllers.post.updateOne(req,res)
+        })
 
         this.router.post('/post/:id/comment/add', (req, res) => {
             Controllers.comment.createOne(req,res)
+        })
+        this.router.post('/post/comment/:commentId/update', (req, res) => {
+            Controllers.comment.updateOne(req,res)
         })
 
         this.router.post('/post/:id/comment/:id/delete', (req, res) => {
