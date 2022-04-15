@@ -10,18 +10,6 @@ const createOne = async (req, res) => {
   .catch( apiError => res.json( { data: null, err: apiError } ))
 }
 
-const deleteOne = async (req, res) => {
-  const { commentId } = req.body;
-  await Comment.delete({
-    where: {
-      id: commentId
-    }
-  })
-  .then( apiResponse => res.json( { data: apiResponse, err: null } ))
-  .catch( apiError => res.json( { data: null, err: apiError } ))
-}
-
-
 const updateOne = async (req, res) => {
   const author = await User.findOne({
     where: { id: req.body.userId }
@@ -53,6 +41,37 @@ const updateOne = async (req, res) => {
     res.json({
       data: null,
       err: "You are not the author of this comment"
+    })
+  }
+}
+const deleteOne = async (req, res) => {
+  const author = await User.findOne({
+    where: { id: req.body.userId }
+  })
+  const comment = await Comment.findOne({
+    where: { id: req.params.id }
+  })
+  if(author.id = comment.userId){
+    const deleteSuccess = await Comment.destroy({
+      where: {
+        id: req.params.id
+      }
+    });
+    if(deleteSuccess) {
+      return res.status(204).json();
+    } else {
+      res
+      .status(500)
+      .json({
+        status: 500,
+        message: 'Server error',
+      });
+    }
+  }
+  else{
+    res.json({
+      data: null,
+      err: "You are not the author of this Opst"
     })
   }
 }

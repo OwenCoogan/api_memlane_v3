@@ -118,23 +118,35 @@ const updateOne = async (req, res) => {
 }
 
 const deleteOne = async (req, res) => {
-  const deleteSuccess = await Post.destroy({
-    where: {
-      id: req.params.id
-    }
-  });
-
-  if(deleteSuccess) {
-    return res.status(204).json();
-  } else {
-    res
-    .status(500)
-    .json({
-      status: 500,
-      message: 'Server error',
+  const author = await User.findOne({
+    where: { id: req.body.userId }
+  })
+  const post = await Post.findOne({
+    where: { id: req.params.id }
+  })
+  if(author.id = post.userId){
+    const deleteSuccess = await Post.destroy({
+      where: {
+        id: req.params.id
+      }
     });
+    if(deleteSuccess) {
+      return res.status(204).json();
+    } else {
+      res
+      .status(500)
+      .json({
+        status: 500,
+        message: 'Server error',
+      });
+    }
   }
-
+  else{
+    res.json({
+      data: null,
+      err: "You are not the author of this Opst"
+    })
+  }
 }
 
 const AddPicture = async (req, res) => {
