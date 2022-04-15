@@ -13,6 +13,15 @@ module.exports = {
         "Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat.",
       createdAt: new Date(),
       updatedAt: new Date()
+     },
+     {
+      userId: author.id,
+      title: "This is a new post at the eiffel tower, it should come within range of the geolocated posts query",
+      content: "owen@test.com",
+      latitude: 49.126959,
+      longitude: 1.840122,
+      createdAt: new Date(),
+      updatedAt: new Date()
      }], {});
  },
 
