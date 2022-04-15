@@ -83,3 +83,6 @@ It started with an idea based on my desire to create something fun that might ge
 
 
 
+FOR THE POSTMAN COLLECTION
+
+I would create a new resource before updating & deleting that type of resource

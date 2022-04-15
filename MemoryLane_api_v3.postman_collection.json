@@ -1,0 +1,418 @@
+{
+	"info": {
+		"_postman_id": "570b23a3-2ace-49dd-bb56-5fa987629a66",
+		"name": "MemoryLane_api_v3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Create New User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Owen Coogan\",\n    \"email\": \"owen@azeazeazeaze.com\",\n    \"password\": \"4RFV(tgb§yhn\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6950/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6950",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6950/auth/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6950",
+							"path": [
+								"auth",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login with Registered User ( do after post for creating new user )",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Owen Coogan\",\n    \"email\": \"owen@azeazeazeaze.com\",\n    \"password\": \"4RFV(tgb§yhn\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6950/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6950",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "posts",
+			"item": [
+				{
+					"name": "Get GeoLocated Posts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"latitude\":49.126959,\n    \"longitude\":1.840122\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6950/v1/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6950",
+							"path": [
+								"v1",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6950/v1/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6950",
+							"path": [
+								"v1",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create One Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"This is a new post at the eiffel tower, it should come within range of the geolocated posts query\",\n    \"content\": \"owen@test.com\",\n    \"userId\": \"da542d88-712a-43cb-a5d7-6bf50ac1e1d1\",\n    \"latitude\":49.126959,\n    \"longitude\":1.840122\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6950/v1/post/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6950",
+							"path": [
+								"v1",
+								"post",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Post",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6950/v1/posts/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6950",
+							"path": [
+								"v1",
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"da542d88-712a-43cb-a5d7-6bf50ac1e1d1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6950/v1/post/3/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6950",
+							"path": [
+								"v1",
+								"post",
+								"3",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"This is the updated post at the eiffel tower\",\n    \"userId\": \"da542d88-712a-43cb-a5d7-6bf50ac1e1d1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6950/v1/post/6/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6950",
+							"path": [
+								"v1",
+								"post",
+								"6",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comments",
+			"item": [
+				{
+					"name": "Add Comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"postId\": 1,\n    \"comment\": \"New comment 2\",\n    \"userId\": \"da542d88-712a-43cb-a5d7-6bf50ac1e1d1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6950/v1/post/1/comment/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6950",
+							"path": [
+								"v1",
+								"post",
+								"1",
+								"comment",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comment\":\"updated content azeazeaze\",\n    \"commentId\":1,\n    \"userId\": \"da542d88-712a-43cb-a5d7-6bf50ac1e1d1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6950/v1/post/comment/3/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6950",
+							"path": [
+								"v1",
+								"post",
+								"comment",
+								"3",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"This is the updated post at the eiffel tower\",\n    \"userId\": \"da542d88-712a-43cb-a5d7-6bf50ac1e1d1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6950/v1/post/comment/3/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6950",
+							"path": [
+								"v1",
+								"post",
+								"comment",
+								"3",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.environment.get(\"userId\");"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "IamTheWalrus",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "oc@gmail.com",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
