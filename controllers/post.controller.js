@@ -139,7 +139,6 @@ const deleteOne = async (req, res) => {
     })
   }
   if(author.id = post.userId ){
-    console.log("author")
     const deleteSuccess = await Post.destroy({
       where: {
         id: req.params.id
