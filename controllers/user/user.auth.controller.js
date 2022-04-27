@@ -76,7 +76,6 @@ const login = async (req, res) => {
 const checkUser = async (req, res) => {
   const { token } = req.body;
   const decodedJwt = jwt.verify(token,'MemoryLaneCookie')
-  console.log(decodedJwt)
   const foundUser = await User.findOne({
     where: { email: decodedJwt.email }
   });

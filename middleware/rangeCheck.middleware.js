@@ -1,7 +1,6 @@
 
 const rangeCheck = (req) => {
-  const builtRange = req.body.range/10;
-  console.log(builtRange)
+  const builtRange = req.body.range ? req.body.range/10 : 0.1;
   return {
     latitude:{
       min: req.body.latitude - builtRange,
