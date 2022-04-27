@@ -4,7 +4,10 @@
     "password": "postgres",
     "database": "memorylane_development",
     "host": "0.0.0.0",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "ssl": {
+      "cert": "fs.readFileSync(__dirname + '/ca-certificate.crt')"
+    }
   },
   "test": {
     "username": "admin",
@@ -21,7 +24,7 @@
     "port": "25060",
     "dialect": "postgres",
     "ssl": {
-      "cert": "fs.readFileSync(__dirname + '/ca-certificate.crt')",
-  }
+      "cert": "fs.readFileSync(__dirname + '/ca-certificate.crt')"
+    }
   }
 }
