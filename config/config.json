@@ -20,10 +20,8 @@
     "host": "db-psql-memorylane-do-user-10184461-0.b.db.ondigitalocean.com",
     "port": "25060",
     "dialect": "postgres",
-    "connection": {
-      "ssl": {
-        "ca": "fs.readFileSync('ca-certificate.cer').toString()"
-      }
-    }
+    "ssl": {
+      "cert": "fs.readFileSync(__dirname + '/ca-certificate.crt')",
+  }
   }
 }
