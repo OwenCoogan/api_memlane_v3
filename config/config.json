@@ -5,11 +5,9 @@
     "database": "memorylane_development",
     "host": "0.0.0.0",
     "dialect": "postgres",
-    "dialectOptions": {
-      "ssl": {
-        "ca": "fs.readFileSync('../ca-certificate.crt')",
-        "rejectUnauthorized": "true"
-      }
+    "ssl": {
+      "ca": "fs.readFileSync('../ca-certificate.crt')",
+      "rejectUnauthorized": "true"
     }
   },
   "test": {
@@ -26,11 +24,9 @@
     "host": "db-psql-memorylane-do-user-10184461-0.b.db.ondigitalocean.com",
     "port": "25060",
     "dialect": "postgres",
-    "dialectOptions": {
-      "ssl": {
-        "ca": "fs.readFileSync('../ca-certificate.crt')",
-        "rejectUnauthorized": "true"
-      }
+    "ssl": {
+      "ca": "fs.readFileSync('../ca-certificate.crt')",
+      "rejectUnauthorized": "true"
     }
   }
 }
