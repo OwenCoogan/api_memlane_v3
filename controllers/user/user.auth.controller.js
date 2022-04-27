@@ -73,11 +73,36 @@ const login = async (req, res) => {
     });
   }
 }
+const checkUser = async (req, res) => {
+  const { token } = req.body;
+  const decodedJwt = jwt.verify(token,'MemoryLaneCookie')
+  console.log(decodedJwt)
+  const foundUser = await User.findOne({
+    where: { email: decodedJwt.email }
+  });
+  if(foundUser) {
+    return res.json({
+      data: {
+        authenticated:true
+      },
+      err: null
+    });
+  }
+  else{
+    return res.json({
+      data: {
+        authenticated:false
+      },
+      err: "Unauthorized"
+    });
+  }
+}
 
 module.exports = {
         createOne,
         readAll,
         login,
-        readOne
+        readOne,
+        checkUser
     }
 

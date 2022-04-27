@@ -16,6 +16,9 @@ class RouterClass{
         this.router.post('/login', (req, res) => {
             Controllers.user.login(req,res)
         })
+        this.router.post('/check', (req, res) => {
+            Controllers.user.checkUser(req,res)
+        })
     }
 
     init(){
