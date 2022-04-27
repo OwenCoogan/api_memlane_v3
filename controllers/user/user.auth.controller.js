@@ -83,7 +83,7 @@ const checkUser = async (req, res) => {
   if(foundUser) {
     return res.json({
       data: {
-        authenticated:true
+        user:foundUser
       },
       err: null
     });
