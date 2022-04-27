@@ -6,7 +6,7 @@
     "host": "0.0.0.0",
     "dialect": "postgres",
     "ssl": {
-      "ca": "fs.readFileSync('../ca-certificate.crt')",
+      "ca": "fs.readFileSync('./ca-certificate.cer')",
       "rejectUnauthorized": "true"
     }
   },
@@ -25,7 +25,7 @@
     "port": "25060",
     "dialect": "postgres",
     "ssl": {
-      "ca": "fs.readFileSync('../ca-certificate.crt')",
+      "ca": "fs.readFileSync('./ca-certificate.cer')",
       "rejectUnauthorized": "true"
     }
   }
