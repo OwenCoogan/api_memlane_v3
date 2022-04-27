@@ -1,9 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const fs = require('fs');
-
-const ca = fs.readFileSync('ca-certificate.cer');
 require('dotenv').config();
 global.__basedir = __dirname;
 
@@ -11,9 +8,6 @@ class ServerClass{
   constructor(){
     this.server = express();
     this.port = process.env.PORT;
-    this.options = {
-      ca,
-    }
     }
     init(){
       const ApiRouterClass = require('./routes/api.router');
@@ -51,10 +45,9 @@ class ServerClass{
       this.launch();
     }
     launch(){
-          this.server.listen( this.port, this.options, () => {
+          this.server.listen( this.port, () => {
               console.log({
                   node: `http://localhost:${this.port}`,
-                  ca: ca
               })
           })
   }
