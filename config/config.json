@@ -23,7 +23,6 @@
     "password": "AVNS_AZI7wX8r_YXZX2D",
     "database": "memorylane_production",
     "host": "db-psql-memorylane-do-user-10184461-0.b.db.ondigitalocean.com",
-    "port": "25060",
     "dialect": "postgres",
     "dialectOptions": {
       "ssl": {
