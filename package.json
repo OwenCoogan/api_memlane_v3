@@ -9,7 +9,7 @@
     "build-db": "docker compose up",
     "init-db": "sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
     "prep-db": "sequelize db:migrate && sequelize db:seed:all",
-    "prep-db-prod": "sequelize db:create sequelize db:migrate --env production && sequelize db:seed:all",
+    "prep-db-prod": "sequelize db:create && sequelize db:migrate --env production && sequelize db:seed:all",
     "db:makemigrations": "./node_modules/sequelize-auto-migrations/bin/makemigration.js"
   },
   "repository": {
