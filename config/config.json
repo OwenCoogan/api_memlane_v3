@@ -22,7 +22,7 @@
     "dialect": "postgres",
     "dialectOptions": {
       "ssl": {
-        "ca":"fs.readFileSync('certificates/ca-certificate.cer').toString()"
+        "ca":"fs.readFileSync(../'certificates/ca-certificate.cer').toString()"
       }
     }
   }
