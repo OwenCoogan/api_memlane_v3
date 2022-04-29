@@ -16,7 +16,7 @@
   "production": {
     "username": "doadmin",
     "password": "AVNS_AZI7wX8r_YXZX2D",
-    "database": "memorylane_production",
+    "database": "defaultdb",
     "host": "db-psql-memorylane-do-user-10184461-0.b.db.ondigitalocean.com",
     "dialect": "postgres",
     "dialectOptions": {
