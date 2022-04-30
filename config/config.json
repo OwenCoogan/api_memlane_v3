@@ -3,7 +3,7 @@
     "username": "admin",
     "password": "postgres",
     "database": "memorylane_development",
-    "host": "0.0.0.0",
+    "host": "db",
     "dialect": "postgres"
   },
   "test": {
@@ -14,10 +14,15 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "admin",
-    "password": "postgres",
-    "database": "memorylane_production",
-    "host": "0.0.0.0",
-    "dialect": "postgres"
+    "username": "doadmin",
+    "password": "AVNS_AZI7wX8r_YXZX2D",
+    "database": "defaultdb",
+    "host": "db-psql-memorylane-do-user-10184461-0.b.db.ondigitalocean.com",
+    "port" : "25060",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": true,
+      "ca" : "fs.readFileSync('ca-certificate.cer').toString()"
+    }
   }
 }
