@@ -14,13 +14,14 @@ services:
     ports:
       - "5432:5432"
 
-  memorylane-node-js:
+  owencoo/memorylane-node-js:
     image: memorylane-node-js:latest
     entrypoint: ["/bin/bash", "./entrypoint.sh"]
     build:
       dockerfile
     depends_on:
       - db
+    restart: "on-failure"
     volumes:
     - ./:/usr/src/app
     - /usr/src/app/node_modules
