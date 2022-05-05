@@ -23,6 +23,11 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
         constraints: false,
       });
+      Post.hasMany(models.Tag, {
+        foreignKey: 'id',
+        as: 'tags',
+        constraints: false,
+      });
     }
   }
   Post.init({

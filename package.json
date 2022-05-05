@@ -6,7 +6,8 @@
   "scripts": {
     "test": "test",
     "start": "nodemon server.js",
-    "build-db": "docker compose up",
+    "build-db-dev": "docker compose up",
+    "build-db-prod": "docker compose -f docker-compose-prod.yml up",
     "build-image": "docker build -t memorylane-node-js .",
     "init-db": "sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
     "prep-db": "sequelize db:migrate && sequelize db:seed:all",
