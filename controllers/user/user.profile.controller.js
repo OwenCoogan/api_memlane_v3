@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { Image } = require('../../models');
+const { Image,User,Post } = require('../../models');
 const uploadProfilePicture = async (req, res) => {
   try {
     if (req.file == undefined) {
@@ -24,6 +24,25 @@ const uploadProfilePicture = async (req, res) => {
     return res.json(`Error when trying upload images: ${error}`);
   }
 };
+const getUserProfile = async (req, res) => {
+  console.log(req.params.id)
+  if (req.body === undefined) {
+    return res.json(`You must select a user.`);
+  }
+  await User.findOne({
+    where: { id: req.params.id },
+    include: [
+      {
+        model: Post,
+        as: 'posts',
+      }
+    ]
+  })
+  .then( apiResponse => res.json( { data: apiResponse, err: null } ))
+  .catch( apiError => res.json( { data: null, err: apiError } ))
+};
+
 module.exports = {
   uploadProfilePicture,
+  getUserProfile
 };

@@ -36,7 +36,13 @@ const readAll = async (req,res) => {
 
 const readOne = async (req,res) => {
   await User.findOne({
-    where: { id: req.body.id }
+    where: { id: req.body.id },
+    include: [
+      {
+        model: Post,
+        as: 'posts'
+      },
+]
   })
   .then( apiResponse => res.json( { data: {
     id: apiResponse.id,

@@ -1,11 +1,11 @@
 
-const { Post, Comment, Image,User } = require('../models');
+const { Post , Comment , Image , User, Tag  } = require('../models');
 const { Op } = require("sequelize");
 const fs = require("fs");
 const rangeCheck = require('../middleware/rangeCheck.middleware');
 
 const createOne = async (req, res) => {
-  const { title, content, userId, latitude, longitude  } = req.body;
+  const { title, content, userId, latitude, longitude, tags  } = req.body;
   await Post.create({
     title,
     content,
@@ -13,10 +13,11 @@ const createOne = async (req, res) => {
     longitude:longitude,
     userId: userId,
   })
-  .then( apiResponse => res.json( { data: apiResponse, err: null }))
+  .then( apiResponse => {
+    res.json( { data: apiResponse, err: null })
+  })
   .catch( apiError => res.json( { data: null, err: apiError } ))
 }
-
 const readAll = async (req, res) => {
   if(req.body.latitude){
     const range = rangeCheck(req);
@@ -31,10 +32,6 @@ const readAll = async (req, res) => {
       },
       include: [
         {
-          model: Comment,
-          as: 'comments'
-        },
-        {
           model: Image,
           as: 'images'
         },
@@ -47,10 +44,6 @@ const readAll = async (req, res) => {
   else{
     await Post.findAll({
       include: [
-        {
-          model: Comment,
-          as: 'comments'
-        },
         {
           model: Image,
           as: 'images'
@@ -71,11 +64,19 @@ const readOne = async (req, res) => {
     include: [
       {
         model: Comment,
-        as: 'comments'
+        as: 'comments',
+        include: [{
+          model: User,
+          as: 'author'
+        }]
       },
       {
         model: Image,
         as: 'images'
+      },
+      {
+        model: User,
+        as: 'author'
       },
 
     ]
@@ -198,5 +199,5 @@ module.exports = {
         readOne,
         updateOne,
         deleteOne,
-        AddPicture
+        AddPicture,
     }

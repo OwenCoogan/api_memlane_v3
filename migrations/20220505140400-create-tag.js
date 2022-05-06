@@ -2,7 +2,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Tags', {
-      id: {
+      tagId: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -10,6 +10,9 @@ module.exports = {
       },
       tagname: {
         type: Sequelize.STRING
+      },
+      postId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

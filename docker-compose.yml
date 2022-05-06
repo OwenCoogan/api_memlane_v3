@@ -14,19 +14,6 @@ services:
     ports:
       - "5432:5432"
 
-  memorylane-node-js:
-    image: memorylane-node-js:latest
-    entrypoint: ["/bin/bash", "./entrypoint.sh"]
-    build:
-      dockerfile
-    depends_on:
-      - db
-    volumes:
-    - ./:/usr/src/app
-    - /usr/src/app/node_modules
-    ports:
-      - "6950:6950"
-
   pgadmin:
     container_name: pgadmin4_container
     image: dpage/pgadmin4
