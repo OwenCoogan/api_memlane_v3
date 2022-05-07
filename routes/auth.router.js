@@ -19,6 +19,9 @@ class RouterClass{
         this.router.post('/check', (req, res) => {
             Controllers.user.checkUser(req,res)
         })
+        this.router.post('/update', (req, res) => {
+            Controllers.user.updateOne(req,res)
+        })
     }
 
     init(){

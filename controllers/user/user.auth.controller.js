@@ -24,6 +24,23 @@ const createOne = async (req,res) => {
     return res.status(400)
   }
 }
+const updateOne = async (req,res) => {
+  console.log(req.body)
+  const { id, name } = req.body;
+  const existingUser = await User.findOne({
+    where: { id: id },
+  });
+  if(!existingUser){
+    res.json( { err: 'Server Error' } )
+  }
+  else{
+    await existingUser.update({
+      name: name,
+    })
+    .then( apiResponse => res.json( { data: apiResponse, err: null } ))
+    .catch( apiError => res.json( { data: null, err: apiError } ))
+  }
+}
 
 const readAll = async (req,res) => {
     await User.findAll({
@@ -108,6 +125,7 @@ module.exports = {
         readAll,
         login,
         readOne,
-        checkUser
+        checkUser,
+        updateOne
     }
 
