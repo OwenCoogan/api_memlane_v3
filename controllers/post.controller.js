@@ -35,6 +35,10 @@ const readAll = async (req, res) => {
           model: Image,
           as: 'images'
         },
+        {
+          model: User,
+          as: 'author'
+        },
 
       ]
     })
@@ -47,6 +51,10 @@ const readAll = async (req, res) => {
         {
           model: Image,
           as: 'images'
+        },
+        {
+          model: User,
+          as: 'author'
         },
 
       ]
