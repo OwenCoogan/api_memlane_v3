@@ -33,7 +33,8 @@ const readAll = async (req, res) => {
       include: [
         {
           model: Image,
-          as: 'images'
+          as: 'images',
+          attributes : ['name']
         },
         {
           model: User,
@@ -50,7 +51,8 @@ const readAll = async (req, res) => {
       include: [
         {
           model: Image,
-          as: 'images'
+          as: 'images',
+          attributes : ['name']
         },
         {
           model: User,
@@ -80,7 +82,8 @@ const readOne = async (req, res) => {
       },
       {
         model: Image,
-        as: 'images'
+        as: 'images',
+        attributes : ['name']
       },
       {
         model: User,
@@ -193,7 +196,7 @@ const AddPicture = async (req, res) => {
         __basedir + `/resources/static/assets/tmp/post/${req.file.filename}`,
         image.data
       );
-      return res.send(`File has been uploaded.`);
+      return res.json(`File has been uploaded (${req.file.filename})`);
     });
   } catch (error) {
     return res.json(`Error when trying upload images: ${error}`);
