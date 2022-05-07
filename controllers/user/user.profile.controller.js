@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { Image,User,Post } = require('../../models');
+const { Image,User,Post,Comment } = require('../../models');
 const uploadProfilePicture = async (req, res) => {
   try {
     if (req.file == undefined) {
@@ -35,7 +35,12 @@ const getUserProfile = async (req, res) => {
       {
         model: Post,
         as: 'posts',
-      }
+      },
+      {
+        model: Comment,
+        as: 'comments',
+      },
+
     ]
   })
   .then( apiResponse => res.json( { data: apiResponse, err: null } ))

@@ -9,6 +9,7 @@ const createOne = async (req, res) => {
   await Post.create({
     title,
     content,
+    userId,
     latitude:latitude,
     longitude:longitude,
     userId: userId,
