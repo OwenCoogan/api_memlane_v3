@@ -8,6 +8,7 @@ module.exports = {
         id:uuidv4(),
         name: 'Owen Coogan',
         email: 'oc@gmail.com',
+        description:'I am a web developer',
         role:'super-admin',
         password: await bcrypt.hash('IamTheWalrus', 10),
         createdAt: new Date(),

@@ -26,7 +26,7 @@ const createOne = async (req,res) => {
 }
 const updateOne = async (req,res) => {
   console.log(req.body)
-  const { id, name } = req.body;
+  const { id, name,description } = req.body;
   const existingUser = await User.findOne({
     where: { id: id },
   });
@@ -36,6 +36,7 @@ const updateOne = async (req,res) => {
   else{
     await existingUser.update({
       name: name,
+      description: description,
     })
     .then( apiResponse => res.json( { data: apiResponse, err: null } ))
     .catch( apiError => res.json( { data: null, err: apiError } ))
