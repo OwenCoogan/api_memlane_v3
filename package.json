@@ -9,7 +9,6 @@
     "build-db-dev": "docker compose up",
     "build-db-prod": "docker compose -f docker-compose-prod.yml up",
     "build-image": "docker build -t memorylane-node-js .",
-    "init-db": "sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
     "prep-db": "sequelize db:migrate && sequelize db:seed:all",
     "prep-db-prod": "sequelize db:migrate --env production && sequelize db:seed:all",
     "db:makemigrations": "./node_modules/sequelize-auto-migrations/bin/makemigration.js"
@@ -28,6 +27,7 @@
     "axios": "^0.26.1",
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",

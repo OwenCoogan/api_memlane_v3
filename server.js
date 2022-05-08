@@ -1,6 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const corsOptions ={
+    origin:'http://localhost:3000',
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
 require('dotenv').config();
 global.__basedir = __dirname;
 
@@ -31,6 +37,8 @@ class ServerClass{
       });
 
       this.server.use(bodyParser.json({limit: '20mb'}));
+
+      this.server.use(cors(corsOptions));
       this.server.use(bodyParser.urlencoded({ extended: true }));
       this.server.use(cookieParser(process.env.COOKIE_SECRET));
       this.server.use('/resources', express.static(__dirname + '/resources'))
